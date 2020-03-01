@@ -57,7 +57,8 @@ class Chat extends React.Component{
                     <div className="container">
                     <div className="row">
                         { !this.state.authenticated ? (
-                            <div className = "col-md-3" style = {{marginTop : '100px'}}>
+                            <div className = "offset-md-3 col-md-4" style = {{marginTop : '100px'}}>
+                                <h3>Please enter your secret key</h3>
                             <form onSubmit = { this.handleSecret }>
                                 <div className = "form-group">
                                     <input type = "text" className ="form-control" name = "secret" value = { this.state.secret } onChange = { this.handleChange } placeholder = "enter secret key" />
@@ -66,7 +67,7 @@ class Chat extends React.Component{
                             </form>
                         </div>
                         ) : (
-                            <div className=" col-md-4">
+                            <div className="offset-md-3 col-md-4" style = {{marginTop : '100px'}}>
                             <div className="card">
                                 <div className="card-body">
                                     <div className="card-title">Chat</div>
