@@ -1,10 +1,13 @@
 # Chat app
-A basic one to one chat application that allows users to communicate with each other. It is done using socket.io.Messages are encrypted and stored in the database and while retrieving it is again devrypted and sent as response.
+A basic one to one chat application that allows users to communicate with each other. It is done using socket.io.Messages are encrypted and stored in the database and while retrieving it is again decrypted and sent as response.
 
 # Installation
 ``` bash
 npm install
 ```
+``` bash
+npm run dev
+``` 
 
 # Dependencies
 * express
