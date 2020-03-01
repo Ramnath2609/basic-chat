@@ -13,6 +13,7 @@ npm run dev
 * express
 * mongoose
 * socket.io
+* socket.io-client
 * bootstrap
 * cors
 * concurrently

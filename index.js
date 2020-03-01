@@ -9,7 +9,7 @@ const setUpDB = require('./config/database')
 const socket = require('socket.io')
 
 setUpDB()
-app.use(express.static(path.join(__dirname,"client/build"))) 
+app.use(express.static(path.join(__dirname,"build"))) 
 app.use(express.json())
 app.use(cors())
 
