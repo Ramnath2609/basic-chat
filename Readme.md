@@ -1,6 +1,6 @@
 # Chat app
 A basic one to one chat application that allows users to communicate with each other. It is done using socket.io.Messages are encrypted and stored in the database and while retrieving it is again decrypted and sent as response.
-![](./client/public/basic-chat.jpg)
+![](client/public/basic-chat.jpg)
 # Installation
 ``` bash
 npm install
