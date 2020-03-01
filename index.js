@@ -21,9 +21,9 @@ app.get("*",(req,res) => {
 const server = app.listen(port, () => {
     console.log('connected to port', port)
 })
+
+
 io = socket(server)
-
-
 io.on('connection', (socket) => {
     socket.auth = false
     socket.on('authenticate', function(data){
