@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const encryption = require('../middlewares/encryption')
+const crypter = require('../middlewares/crypter')
 
 const messageSchema = new Schema({
     body : {
@@ -17,7 +17,7 @@ const messageSchema = new Schema({
 
 messageSchema.pre('save', function(next){
     const message = this
-    message.body = encryption(message.body)
+    message.body = crypter(message.body)
     next()
 })
 

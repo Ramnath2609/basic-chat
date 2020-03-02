@@ -23,6 +23,7 @@ const server = app.listen(port, () => {
 
 
 io = socket(server)
+
 io.on('connection', (socket) => {
     socket.auth = false
     socket.on('authenticate', function(data){
@@ -31,9 +32,8 @@ io.on('connection', (socket) => {
             .then(messages => {
                 io.emit('authenticated', messages)
                 socket.auth = true
-            })
-            
-        }else{
+            })   
+        } else  {
             io.emit('INVALID_KEY')
         }
     })
