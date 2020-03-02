@@ -1,8 +1,7 @@
 const express = require('express')
 const app = express()
-const Message = require('./app/models/Message')
+const messagesController = require('./app/controllers/messagesController')
 const port = process.env.PORT || 3900
-const decrypt = require('./app/middlewares/decryption')
 const cors = require('cors')
 const path = require('path')
 const setUpDB = require('./config/database')
@@ -28,38 +27,31 @@ io.on('connection', (socket) => {
     socket.auth = false
     socket.on('authenticate', function(data){
         if(data.secret == "secret123"){
-            Message.find()
+            messagesController.list()
             .then(messages => {
-                messages.forEach(msg => {
-                    msg.body = decrypt(msg.body)
-                })
                 io.emit('authenticated', messages)
+                socket.auth = true
             })
-            socket.auth = true
+            
         }else{
             io.emit('INVALID_KEY')
         }
     })
 
     socket.on('SEND_MESSAGE', function(data){
-    const message = new Message(data)
-    message.save()
-        .then(message => {
-            message.body = decrypt(message.body)
-            io.emit('RECEIVE_MESSAGE', message)
-        })
+        messagesController.create(data)
+            .then(message => {
+                io.emit('RECEIVE_MESSAGE', message)
+            })
     })
 
     socket.on('GET_MESSAGES', function(){
-        Message.find()
+        messagesController.list()
             .then(messages => {
-                messages.forEach(msg => {
-                    msg.body = decrypt(msg.body)
-                })
                 io.emit('SET_MESSAGES', messages)
             })
     })
-})
 
+})
 
 
