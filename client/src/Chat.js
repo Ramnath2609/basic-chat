@@ -1,5 +1,6 @@
 import React from 'react'
 import io from 'socket.io-client'
+import Swal from 'sweetalert2'
 
 class Chat extends React.Component{
     constructor(props){
@@ -18,6 +19,15 @@ class Chat extends React.Component{
         })
         this.socket.on('SET_MESSAGES', function(data){
             setMessages(data)
+        })
+
+        this.socket.on('authenticated', function(data){
+            Swal.fire('Good job!', 'Successful', 'success')
+            setMessages(data)
+        })
+
+        this.socket.on('INVALID_KEY', function(){
+            Swal.fire('Oops !', 'Invalid key', 'error')
         })
 
         const addMessage = data => {

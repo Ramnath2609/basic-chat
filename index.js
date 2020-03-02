@@ -33,11 +33,14 @@ io.on('connection', (socket) => {
                 messages.forEach(msg => {
                     msg.body = decrypt(msg.body)
                 })
-                io.emit('SET_MESSAGES', messages)
+                io.emit('authenticated', messages)
             })
             socket.auth = true
+        }else{
+            io.emit('INVALID_KEY')
         }
     })
+
     socket.on('SEND_MESSAGE', function(data){
     const message = new Message(data)
     message.save()
@@ -46,15 +49,16 @@ io.on('connection', (socket) => {
             io.emit('RECEIVE_MESSAGE', message)
         })
     })
-        socket.on('GET_MESSAGES', function(){
-            Message.find()
-                .then(messages => {
-                    messages.forEach(msg => {
-                        msg.body = decrypt(msg.body)
-                    })
-                    io.emit('SET_MESSAGES', messages)
+
+    socket.on('GET_MESSAGES', function(){
+        Message.find()
+            .then(messages => {
+                messages.forEach(msg => {
+                    msg.body = decrypt(msg.body)
                 })
-        })
+                io.emit('SET_MESSAGES', messages)
+            })
+    })
 })
 
 
