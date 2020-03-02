@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(cors())
 
 app.get("*",(req,res) => { 
-    res.sendFile(path.join(__dirname + "/client/build/index.html")) 
+    res.sendFile(path.resolve(__dirname,  "client" ,"build" ,"index.html")) 
 }) 
 
 const server = app.listen(port, () => {
