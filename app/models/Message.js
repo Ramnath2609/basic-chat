@@ -6,19 +6,14 @@ const messageSchema = new Schema({
     body : {
         type : String,
         required : true,
-        
     },
     username : {
         type : String,
         required : true
+    },
+    key : {
+        type : String
     }
-})
-
-
-messageSchema.pre('save', function(next){
-    const message = this
-    message.body = crypter(message.body)
-    next()
 })
 
 

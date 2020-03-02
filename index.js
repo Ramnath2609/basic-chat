@@ -8,10 +8,10 @@ const setUpDB = require('./config/database')
 const socket = require('socket.io')
 
 setUpDB()
+
 app.use(express.static(path.join(__dirname,"build"))) 
 app.use(express.json())
 app.use(cors())
-
 
 app.get("*",(req,res) => { 
     res.sendFile(path.join(__dirname + "/client/build/index.html")) 
@@ -23,7 +23,6 @@ const server = app.listen(port, () => {
 
 
 io = socket(server)
-
 io.on('connection', (socket) => {
     socket.auth = false
     socket.on('authenticate', function(data){
@@ -51,7 +50,6 @@ io.on('connection', (socket) => {
                 io.emit('SET_MESSAGES', messages)
             })
     })
-
 })
 
 
