@@ -58,10 +58,9 @@ class Chat extends React.Component{
 
     sendMessage = (e) => {
         e.preventDefault()
-        const body = crypter(this.state.message)
         this.socket.emit('SEND_MESSAGE', {
             username: this.state.username,
-            body ,
+            body : this.state.message,
             secret : this.state.secret
         })
         this.setState({ message: '' })

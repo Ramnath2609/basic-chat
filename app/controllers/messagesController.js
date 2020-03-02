@@ -16,6 +16,7 @@ module.exports.create = (data) => {
     const message = new Message(data)
     return message.save()
                 .then(message => {
+                    message.body = crypter(message.body)
                     return Promise.resolve(message)
                 })
                 .catch(err => {
