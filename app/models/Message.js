@@ -10,9 +10,6 @@ const messageSchema = new Schema({
     username : {
         type : String,
         required : true
-    },
-    key : {
-        type : String
     }
 })
 
