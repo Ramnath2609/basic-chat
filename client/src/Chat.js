@@ -1,7 +1,7 @@
 import React from 'react'
 import io from 'socket.io-client'
 import Swal from 'sweetalert2'
-import { crypter } from './crypt'
+
 
 class Chat extends React.Component{
     constructor(props){
@@ -14,7 +14,7 @@ class Chat extends React.Component{
             authenticated : false
         }
 
-        this.socket = io(window.location.hostname)
+        this.socket = io('localhost:3900')
 
         this.socket.on('RECEIVE_MESSAGE', function(data){
             addMessage(data);
@@ -33,14 +33,10 @@ class Chat extends React.Component{
         })
 
         const addMessage = (message) => {
-            message.body = crypter(message.body)
             this.setState({ messages: [...this.state.messages, message] });
         }
 
         const setMessages = (messages) => {
-            messages.forEach(msg => {
-                msg.body = crypter(msg.body)
-            })
             this.setState({ messages , authenticated : true })
         }
     }
