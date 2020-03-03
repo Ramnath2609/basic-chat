@@ -14,7 +14,7 @@ class Chat extends React.Component{
             authenticated : false
         }
 
-        this.socket = io(window.location.hostname)
+        this.socket = io('localhost:3900')
 
         this.socket.on('RECEIVE_MESSAGE', function(data){
             addMessage(data);
