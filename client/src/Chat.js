@@ -15,7 +15,7 @@ class Chat extends React.Component{
             authenticated : false
         }
 
-        this.socket = io(window.location.hostname)
+        this.socket = io('localhost:3900')
 
         this.socket.on('RECEIVE_MESSAGE', function(message){ 
             message.body = crypter(message.body)
@@ -28,11 +28,11 @@ class Chat extends React.Component{
             setMessages(messages)
         })
 
-        this.socket.on('ERROR', function(data){
+        this.socket.on('error', function(data){
             Swal.fire('Oops !', data.notice, 'error')
         })
 
-        this.socket.on('AUTHENTICATED', function(messages){
+        this.socket.on('authenticated', function(messages){
             Swal.fire('Good job!', 'Successful', 'success')
             messages.forEach(msg => {
                 msg.body = crypter(msg.body)
@@ -63,7 +63,7 @@ class Chat extends React.Component{
 
     handleSecret = (e) => {
         e.preventDefault()
-        this.socket.emit('AUTHENTICATE', {
+        this.socket.emit('authenticate', {
             secret : this.state.secret
         })
     }
