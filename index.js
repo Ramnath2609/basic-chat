@@ -36,7 +36,10 @@ io.on('connection', (socket) => {
             messagesController.list()
             .then(messages => {
                 socket.emit('authenticated',  messages )
-            })   
+            }) 
+            .catch(() => {
+                socket.emit('error', { notice : 'Couldnt fetch messages'})
+            })  
         } else  {
             socket.emit('INVALID_KEY')
         }
@@ -47,12 +50,18 @@ io.on('connection', (socket) => {
             .then(message => {
                 io.emit('RECEIVE_MESSAGE', message)
             })
+            .catch(() => {
+                socket.emit('error', { notice : 'Message not sent, try again !'})
+            })
     })
 
     socket.on('GET_MESSAGES', function(){
         messagesController.list()
             .then(messages => {
                 io.emit('SET_MESSAGES', messages)
+            })
+            .catch(() => {
+                socket.emit('error', { notice : 'Couldnt fetch messages' })
             })
     })
  

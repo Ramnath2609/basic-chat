@@ -23,6 +23,10 @@ class Chat extends React.Component{
             setMessages(data)
         })
 
+        this.socket.on('error', function(data){
+            Swal.fire('Oops !', data.notice, 'error')
+        })
+
         this.socket.on('authenticated', function(data){
             Swal.fire('Good job!', 'Successful', 'success')
             setMessages(data)
