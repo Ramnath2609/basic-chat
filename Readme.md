@@ -19,4 +19,4 @@ npm run dev
 * concurrently
 
 # Usage
-First enter the secret key. Once entered the chatbox will open and it will display all the chat history between the two users. Type your username and also the message within the input area. Once done, click on submit and the message will be sent to the other user.
+First enter the secret key. Once entered the chatbox will open and it will display all the chat history between the two users. Type your username and also the message within the input area. Once done, click on submit and the message will be sent to the other user.If more than two users connect at a same time the socket of the third user will be disconnected.

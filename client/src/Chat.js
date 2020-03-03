@@ -14,7 +14,7 @@ class Chat extends React.Component{
             authenticated : false
         }
 
-        this.socket = io(window.location.hostname)
+        this.socket = io('localhost:3900')
 
         this.socket.on('RECEIVE_MESSAGE', function(data){
             addMessage(data);
@@ -56,6 +56,10 @@ class Chat extends React.Component{
         })
     }
 
+    handleExit = () => {
+        this.setState({ authenticated : false, secret : '' })
+    }
+
     sendMessage = (e) => {
         e.preventDefault()
         this.socket.emit('SEND_MESSAGE', {
@@ -75,6 +79,9 @@ class Chat extends React.Component{
                             <div className = "offset-md-3 col-md-4" style = {{marginTop : '100px'}}>
                                 <h3>Please enter your secret key</h3>
                             <form onSubmit = { this.handleSecret }>
+                            <div className = "form-group">
+                                    <input type = "text" className ="form-control" name = "username" value = { this.state.username } onChange = { this.handleChange } placeholder = "enter username" />
+                                </div>
                                 <div className = "form-group">
                                     <input type = "text" className ="form-control" name = "secret" value = { this.state.secret } onChange = { this.handleChange } placeholder = "enter secret key" />
                                 </div>
@@ -100,12 +107,10 @@ class Chat extends React.Component{
                                     </div>
                                 </div>
                                 <div className="card-footer">
-                                        <input type="text" name = "username" placeholder="Username" onChange = { this.handleChange } value = { this.state.username } className="form-control"/>
-                                        <br/>
                                         <input type="text" name = "message" placeholder="Message" value = { this.state.message } onChange = { this.handleChange } className="form-control"/>
                                         <br/>
-                                        <button onClick={this.sendMessage} className="btn btn-primary form-control">Send</button>
-    
+                                        <button onClick={this.sendMessage} className="btn btn-primary form-control">Send</button><hr/>
+                                        <button className = "btn btn-primary form-control" onClick ={this.handleExit}>Exit</button>
                                 </div>
                             </div>
                         </div>

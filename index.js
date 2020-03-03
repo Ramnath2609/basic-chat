@@ -24,8 +24,8 @@ const server = app.listen(port, () => {
 
 io = socket(server)
 io.on('connection', (socket) => {
-
-    if(io.eio.clientsCount > 2){
+    
+       if(io.eio.clientsCount > 2){
        socket.emit('ACCESS_DENIED')
        socket.disconnect()
        return
@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
         if(data.secret == "secret123"){
             messagesController.list()
             .then(messages => {
-                socket.emit('authenticated', messages)
+                socket.emit('authenticated',  messages )
             })   
         } else  {
             io.emit('INVALID_KEY')
@@ -55,6 +55,7 @@ io.on('connection', (socket) => {
                 io.emit('SET_MESSAGES', messages)
             })
     })
+ 
 })
 
 
