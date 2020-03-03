@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
     }
 
     socket.on('authenticate', function(data){
-        if(data.secret == process.env.SECRET_KEY){
+        if(data.secret ==  'secret123'){
             messagesController.list()
             .then(messages => {
                 socket.emit('authenticated',  messages )
