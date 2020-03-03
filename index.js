@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const messagesController = require('./app/controllers/messagesController')
 const port = process.env.PORT || 3900
+require('dotenv').config()
 const cors = require('cors')
 const path = require('path')
 const setUpDB = require('./config/database')
@@ -32,7 +33,7 @@ io.on('connection', (socket) => {
     }
 
     socket.on('authenticate', function(data){
-        if(data.secret == "secret123"){
+        if(data.secret == process.env.SECRET_KEY){
             messagesController.list()
             .then(messages => {
                 socket.emit('authenticated',  messages )

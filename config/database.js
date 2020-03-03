@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const setUpDB = () => {
-    mongoose.connect('mongodb+srv://ramanthdb:ramnath@cluster0-mhiwr.mongodb.net/basic-chat?retryWrites=true&w=majority' , { useNewUrlParser : true, useUnifiedTopology : true }, (err) => {
+    mongoose.connect(process.env.DB_URI, { useNewUrlParser : true, useUnifiedTopology : true }, (err) => {
     if(err){
         console.log(err)
     }
