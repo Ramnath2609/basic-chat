@@ -15,7 +15,7 @@ class Chat extends React.Component{
             authenticated : false
         }
 
-        this.socket = io('localhost:3900')
+        this.socket = io(window.location.hostname)
 
         this.socket.on('RECEIVE_MESSAGE', function(message){ 
             message.body = crypter(message.body)
