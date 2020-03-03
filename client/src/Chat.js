@@ -28,6 +28,10 @@ class Chat extends React.Component{
             setMessages(data)
         })
 
+        this.socket.on('ACCESS_DENIED', function(){
+            Swal.fire('Oops!', 'Access denied', 'error')
+        })
+
         this.socket.on('INVALID_KEY', function(){
             Swal.fire('Oops !', 'Invalid key', 'error')
         })
