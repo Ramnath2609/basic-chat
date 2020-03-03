@@ -28,11 +28,11 @@ class Chat extends React.Component{
             setMessages(messages)
         })
 
-        this.socket.on('error', function(data){
+        this.socket.on('ERROR', function(data){
             Swal.fire('Oops !', data.notice, 'error')
         })
 
-        this.socket.on('authenticated', function(messages){
+        this.socket.on('AUTHENTICATED', function(messages){
             Swal.fire('Good job!', 'Successful', 'success')
             messages.forEach(msg => {
                 msg.body = crypter(msg.body)
@@ -63,7 +63,7 @@ class Chat extends React.Component{
 
     handleSecret = (e) => {
         e.preventDefault()
-        this.socket.emit('authenticate', {
+        this.socket.emit('AUTHENTICATE', {
             secret : this.state.secret
         })
     }
