@@ -38,7 +38,7 @@ io.on('connection', (socket) => {
                 socket.emit('authenticated',  messages )
             })   
         } else  {
-            io.emit('INVALID_KEY')
+            socket.emit('INVALID_KEY')
         }
     })
 
