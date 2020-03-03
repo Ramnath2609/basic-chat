@@ -1,5 +1,5 @@
 # Chat app
-A basic one to one chat application that allows users to communicate with each other. It is done using socket.io.Messages are encrypted and stored in the database and while retrieving it is again decrypted and sent as response.Encryption is done with own logic.There isnt any external library added for the purpose of encryption.
+A basic one to one chat application that allows users to communicate with each other. It is done using socket.io.Messages are encrypted and stored in the database and while retrieving it is sent back to the client and decrypted on the client side.Encryption is done with own logic.There isnt any external library added for the purpose of encryption.
 
 ![alt imge](https://github.com/Ramnath2609/basic-chat/blob/master/client/src/images/basic-chat-app.jpg)
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import io from 'socket.io-client'
 import Swal from 'sweetalert2'
+import { crypter } from './crypter'
 
 
 class Chat extends React.Component{
@@ -16,20 +17,27 @@ class Chat extends React.Component{
 
         this.socket = io('localhost:3900')
 
-        this.socket.on('RECEIVE_MESSAGE', function(data){
-            addMessage(data);
+        this.socket.on('RECEIVE_MESSAGE', function(message){ 
+            message.body = crypter(message.body)
+            addMessage(message);
         })
-        this.socket.on('SET_MESSAGES', function(data){
-            setMessages(data)
+        this.socket.on('SET_MESSAGES', function(messages){
+            messages.forEach(msg => {
+                msg.body = crypter(msg.body)
+            })
+            setMessages(messages)
         })
 
         this.socket.on('error', function(data){
             Swal.fire('Oops !', data.notice, 'error')
         })
 
-        this.socket.on('authenticated', function(data){
+        this.socket.on('authenticated', function(messages){
             Swal.fire('Good job!', 'Successful', 'success')
-            setMessages(data)
+            messages.forEach(msg => {
+                msg.body = crypter(msg.body)
+            })
+            setMessages(messages)
         })
 
         this.socket.on('ACCESS_DENIED', function(){
